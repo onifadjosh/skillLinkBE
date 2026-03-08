@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to SkillLink</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f5f7fa;
+            padding: 20px;
+        }
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+        }
+        .header {
+            background: linear-gradient(135deg, #2b7fff 0%, #1a5fd9 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .header p {
+            font-size: 16px;
+            opacity: 0.95;
+        }
+        .content {
+            padding: 40px 30px;
+            color: #333333;
+        }
+        .greeting {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+        }
+        .intro-text {
+            font-size: 15px;
+            color: #555555;
+            margin-bottom: 30px;
+            line-height: 1.7;
+        }
+        .features {
+            background-color: #f8fafc;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+        .features h2 {
+            font-size: 20px;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 18px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .feature-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        .feature-icon {
+            background: linear-gradient(135deg, #2b7fff 0%, #1a5fd9 100%);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+            margin-right: 15px;
+        }
+        .feature-text h3 {
+            font-size: 16px;
+            color: #1a1a1a;
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+        .feature-text p {
+            font-size: 14px;
+            color: #666666;
+            line-height: 1.5;
+        }
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #2b7fff 0%, #1a5fd9 100%);
+            color: white;
+            text-decoration: none;
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            text-align: center;
+            margin: 20px 0;
+            transition: transform 0.2s;
+        }
+        .cta-button:hover {
+            transform: translateY(-2px);
+        }
+        .cta-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .support-text {
+            font-size: 14px;
+            color: #666666;
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 1px solid #e5e7eb;
+        }
+        .support-text a {
+            color: #2b7fff;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .footer {
+            background-color: #f8fafc;
+            padding: 25px 30px;
+            text-align: center;
+            font-size: 13px;
+            color: #888888;
+        }
+        .footer a {
+            color: #2b7fff;
+            text-decoration: none;
+            margin: 0 8px;
+        }
+        .social-links {
+            margin: 15px 0;
+        }
+        .social-links a {
+            display: inline-block;
+            width: 36px;
+            height: 36px;
+            background-color: #e5e7eb;
+            border-radius: 50%;
+            margin: 0 6px;
+            line-height: 36px;
+            color: #555555;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Welcome to SkillLink <%= username %>! 🎉</h1>
+            <p>Your gateway to talented student professionals</p>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content">
+            <div class="greeting">Hi <%= fullname %>,</div>
+            
+            <div class="intro-text">
+                We're thrilled to have you join the SkillLink community! You've just unlocked access to a vibrant marketplace of talented students ready to bring their skills to your projects.
+            </div>
+
+            <div class="intro-text">
+                Whether you're looking for design, development, writing, marketing, or any other skill, SkillLink makes it easy to find, connect with, and hire the perfect student for your needs.
+            </div>
+
+            <!-- Features Section -->
+            <div class="features">
+                <h2>What You Can Do on SkillLink</h2>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">🔍</div>
+                    <div class="feature-text">
+                        <h3>Browse Student Profiles</h3>
+                        <p>Explore portfolios, reviews, and skills to find the perfect match for your project.</p>
+                    </div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-icon">💬</div>
+                    <div class="feature-text">
+                        <h3>Direct Communication</h3>
+                        <p>Message students directly to discuss your project requirements and expectations.</p>
+                    </div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-icon">⚡</div>
+                    <div class="feature-text">
+                        <h3>Quick & Easy Hiring</h3>
+                        <p>Post your project or hire students directly with our streamlined process.</p>
+                    </div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-icon">✨</div>
+                    <div class="feature-text">
+                        <h3>Quality Guaranteed</h3>
+                        <p>Access verified student profiles with ratings and reviews from previous clients.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA Button -->
+            <div class="cta-container">
+                <a href="[DASHBOARD_LINK]" class="cta-button">Start Exploring Talent</a>
+            </div>
+
+            <!-- Support Section -->
+            <div class="support-text">
+                Need help getting started? Check out our <a href="[HELP_CENTER_LINK]">Help Center</a> or reach out to our support team at <a href="mailto:support@skilllink.com">support@skilllink.com</a>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="social-links">
+                <a href="[TWITTER_LINK]">𝕏</a>
+                <a href="[LINKEDIN_LINK]">in</a>
+                <a href="[INSTAGRAM_LINK]">📷</a>
+            </div>
+            <p>
+                <a href="[WEBSITE_LINK]">SkillLink.com</a> |
+                <a href="[PRIVACY_LINK]">Privacy Policy</a> |
+                <a href="[TERMS_LINK]">Terms of Service</a>
+            </p>
+            <p style="margin-top: 12px;">
+                © 2025 SkillLink. All rights reserved.
+            </p>
+            <p style="margin-top: 8px; font-size: 12px;">
+                You're receiving this email because you signed up for SkillLink.<br>
+                <a href="[UNSUBSCRIBE_LINK]">Unsubscribe</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
