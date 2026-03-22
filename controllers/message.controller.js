@@ -8,6 +8,7 @@ const sendMessage = async (req, res) => {
       senderId: req.userId,
       receiverId,
       content,
+      isRead: false
     });
     
     await createNotification(receiverId, `New message from ${req.userId}`, "message");
@@ -22,12 +23,19 @@ const sendMessage = async (req, res) => {
 const getMessages = async (req, res) => {
   const { otherUserId } = req.params;
   try {
+    // Mark messages as read (where current user is receiver)
+    await MessageModel.updateMany(
+      { senderId: otherUserId, receiverId: req.userId, isRead: { $ne: true } },
+      { $set: { isRead: true } }
+    );
+
     const messages = await MessageModel.find({
       $or: [
         { senderId: req.userId, receiverId: otherUserId },
         { senderId: otherUserId, receiverId: req.userId },
       ],
     }).sort({ createdAt: 1 }).populate("senderId receiverId", "fullname username profilePicture content");
+
     res.send({ status: true, chat: messages });
   } catch (error) {
     console.log(error);
@@ -37,18 +45,41 @@ const getMessages = async (req, res) => {
 
 const getChatList = async (req, res) => {
   try {
-    // Get unique users the current user has chatted with
+    // 1. Get all messages where the user is a participant
     const messages = await MessageModel.find({
       $or: [{ senderId: req.userId }, { receiverId: req.userId }],
-    }).populate("senderId receiverId", "fullname username profilePicture content");
+    })
+    .sort({ createdAt: -1 })
+    .populate("senderId receiverId", "fullname username profilePicture");
 
-    const chatUsers = new Map();
+    const chatGroups = new Map();
+
     messages.forEach((msg) => {
       const otherUser = msg.senderId._id.toString() === req.userId ? msg.receiverId : msg.senderId;
-      chatUsers.set(otherUser._id.toString(), otherUser);
+      const otherUserId = otherUser._id.toString();
+
+      if (!chatGroups.has(otherUserId)) {
+        chatGroups.set(otherUserId, {
+          otherUser,
+          lastMessage: msg.content,
+          updatedAt: msg.createdAt,
+          lastSenderId: msg.senderId._id.toString(),
+          unreadCount: 0
+        });
+      }
+      
+      // Count unread messages (where current user is receiver)
+      if (msg.receiverId._id.toString() === req.userId && !msg.isRead) {
+        chatGroups.get(otherUserId).unreadCount += 1;
+      }
     });
 
-    res.send({ status: true, chats: Array.from(chatUsers.values()) });
+    // Convert map to array and sort by most recent activity
+    const chats = Array.from(chatGroups.values()).sort((a, b) => 
+      new Date(b.updatedAt) - new Date(a.updatedAt)
+    );
+
+    res.send({ status: true, chats });
   } catch (error) {
     console.log(error);
     res.send({ status: false, message: "Error fetching chat list" });

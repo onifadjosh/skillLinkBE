@@ -4,6 +4,7 @@ const MessageSchema = mongoose.Schema({
   senderId: { type: mongoose.Schema.Types.ObjectId, ref: "users", required: true },
   receiverId: { type: mongoose.Schema.Types.ObjectId, ref: "users", required: true },
   content: { type: String, required: true },
+  isRead: { type: Boolean, default: false },
   createdAt: { type: Date, default: Date.now() },
 });
 
